@@ -1,13 +1,15 @@
 ﻿namespace VSIXProjectDemo.ToolWindows
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Windows;
-    using System.Windows.Controls;
+    using Controls = System.Windows.Controls;
+    using Input = System.Windows.Input;
 
     /// <summary>
     /// Interaction logic for MainToolWindowControl.
     /// </summary>
-    public partial class MainToolWindowControl : UserControl
+    public partial class MainToolWindowControl : Controls.UserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainToolWindowControl"/> class.
@@ -17,18 +19,12 @@
             this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Handles click on the button by displaying a message box.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event args.</param>
-        [SuppressMessage("Microsoft.Globalization", "CA1300:SpecifyMessageBoxOptions", Justification = "Sample code")]
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Default event handler naming pattern")]
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void UriTextBox_KeyDown(object sender, Input.KeyEventArgs e)
         {
-            MessageBox.Show(
-                string.Format(System.Globalization.CultureInfo.CurrentUICulture, "Invoked '{0}'", this.ToString()),
-                "MainToolWindow");
+            if (e.Key != Input.Key.Enter) return;
+            if (string.IsNullOrWhiteSpace(UriTextBox.Text)) return;
+
+            this.MainWebBrowser.Navigate(new Uri(this.UriTextBox.Text));
         }
     }
 }
