@@ -24,7 +24,7 @@
             if (e.Key != Input.Key.Enter) return;
             if (string.IsNullOrWhiteSpace(UriTextBox.Text)) return;
 
-            this.MainWebBrowser.Navigate(new Uri(this.UriTextBox.Text));
+            this.DataContext = this.UriTextBox.Text;
         }
     }
 }
