@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView"
              Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
              Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
              mc:Ignorable="d"
@@ -16,6 +17,6 @@
         </Grid.RowDefinitions>
 
         <TextBox x:Name="UriTextBox" Grid.Row="0" Style="{DynamicResource {x:Static vsshell:VsResourceKeys.TextBoxStyleKey}}" KeyDown="UriTextBox_KeyDown"/>
-        <WebBrowser x:Name="MainWebBrowser" Grid.Row="1"/>
+        <controls:WebView x:Name="MainWebBrowser" Grid.Row="1"/>
     </Grid>
 </UserControl>
