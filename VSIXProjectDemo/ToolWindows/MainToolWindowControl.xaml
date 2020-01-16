@@ -4,19 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
-             xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls.WebView"
+             xmlns:converters="clr-namespace:VSIXProjectDemo.Converters"
+             xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
              Background="{DynamicResource {x:Static vsshell:VsBrushes.WindowKey}}"
              Foreground="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:UriValueConverter x:Key="uriValueConverter"></converters:UriValueConverter>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
-        <TextBox x:Name="UriTextBox" Grid.Row="0" Style="{DynamicResource {x:Static vsshell:VsResourceKeys.TextBoxStyleKey}}" KeyDown="UriTextBox_KeyDown"/>
-        <controls:WebView x:Name="MainWebBrowser" Grid.Row="1"/>
+        <TextBox x:Name="UriTextBox" Grid.Row="0" Style="{DynamicResource {x:Static vsshell:VsResourceKeys.TextBoxStyleKey}}" Text="{Binding CurrentTab.SourceUri, Converter={StaticResource uriValueConverter}}"/>
+        <cefSharp:ChromiumWebBrowser x:Name="MainWebBrowser" Grid.Row="1" Address="{Binding CurrentTab.SourceUri}"/>
     </Grid>
 </UserControl>
